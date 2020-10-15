@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
-class auth extends Component {
+class Auth1 extends Component {
   constructor(props) {
     super(props);
 
@@ -135,4 +135,4 @@ handleButtonClick() {
 
   }
 }
-export default auth
+export default Auth1;

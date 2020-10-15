@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Table from './Table';
 import Form from './Form';
-import auth from './auth';
+
 
 class App extends Component {
   state = {

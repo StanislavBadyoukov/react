@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import App from './App';
-import auth from '/auth';
+import Auth1 from './Auth1';
 
 class Marshrut extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/' component={auth} />
+                <Route exact path='/' component={Auth1} />
                 <Route path='/main' component={App} />
             </Switch>
         )
