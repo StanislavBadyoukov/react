@@ -58,12 +58,22 @@ handleButtonClick()
     //if (this.props.logInf) {
       this.props.history.push('/main');
     //}
-  } 
+  }
+  
+  else if (this.state.email === 'viktor@mail.ru' && this.state.pass === 'viktor') 
+  {
+    //this.props.login_bool(true);
+    //if (this.props.logInf) {
+      this.props.history.push('/main');
+    //}
+  }
   else 
   {
     //this.props.login_bool(false);
     alert("Неверный пароль");
   }
+  
+  
 }
 
   render() {
@@ -114,7 +124,7 @@ handleButtonClick()
             freeSolo
             options={Passs.map((option) => option.title)}
             renderInput={(params) => (
-          <TextField {...params} label="pass" margin="normal" variant="outlined" margin="normal" required fullWidth id="pass" name="pass" value={pass} autoFocus onChange={this.handleChange}/>
+          <TextField {...params} label="pass" margin="normal" variant="outlined" margin="normal" required fullWidth id="pass" name="pass" value={pass} autoFocus onChange={this.handleChange} type="password"/>
           )}
           />
             
