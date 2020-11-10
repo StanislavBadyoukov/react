@@ -12,7 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
 class Auth1 extends Component {
   constructor(props) {
@@ -24,12 +26,21 @@ class Auth1 extends Component {
     };
 
   }
-  handleChange = event => {
-    const { name, value } = event.target;
+handleChangeEmail = (event,values) => {
+  
 
     this.setState({
-        [name] : value
+      email: values
+    }, () => {
+      console.log(this.state.email);
     });
+}
+handleChange = (event) => {
+  const { name, value } = event.target;
+
+  this.setState({
+    [name]: value
+  });
 }
 
 onFormSubmit = (event) => {
@@ -38,8 +49,21 @@ onFormSubmit = (event) => {
     this.props.handleSubmit(this.state);
     this.setState(this.initialState);
 }
-handleButtonClick() {
-  this.props.history.push('/main');
+handleButtonClick() 
+{
+  console.log(this.state);
+  if (this.state.email === 'admin@mail.ru' && this.state.pass === 'admin') 
+  {
+    //this.props.login_bool(true);
+    //if (this.props.logInf) {
+      this.props.history.push('/main');
+    //}
+  } 
+  else 
+  {
+    //this.props.login_bool(false);
+    alert("Неверный пароль");
+  }
 }
 
   render() {
@@ -65,6 +89,7 @@ handleButtonClick() {
     const classes = useStyles;
     const { email, pass } = this.state;
     return (
+      
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -75,32 +100,24 @@ handleButtonClick() {
             Войти
         </Typography>
           <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              type="text"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value={email}
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              type="text"
-              margin="normal"
-              required
-              fullWidth
-              name="pass"
-              label="pass"
-              type="pass"
-              id="pass"
-              value={pass} 
-              autoComplete="current-pass"
-            />
+          <Autocomplete
+            onChange={this.handleChangeEmail} 
+            id="email"
+            freeSolo
+            options={Emails.map((option) => option.title)}
+            renderInput={(params) => (
+          <TextField {...params} label="Email Addres" margin="normal" variant="outlined" margin="normal" required fullWidth id="email" name="email" value={email} autoFocus onChange={this.handleChange}/>
+          )}
+          />
+          <Autocomplete 
+            id="pass"
+            freeSolo
+            options={Passs.map((option) => option.title)}
+            renderInput={(params) => (
+          <TextField {...params} label="pass" margin="normal" variant="outlined" margin="normal" required fullWidth id="pass" name="pass" value={pass} autoFocus onChange={this.handleChange}/>
+          )}
+          />
+            
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -135,4 +152,17 @@ handleButtonClick() {
 
   }
 }
+
+const Emails = [
+  { title: 'admin@mail.ru'},
+  { title: 'viktor@mail.ru'}
+  
+];
+const Passs = [
+  { title: 'А'},
+  { title: 'Пороль'},
+  { title: 'Нужно'},
+  { title: 'Знать'}
+  
+];
 export default Auth1;
