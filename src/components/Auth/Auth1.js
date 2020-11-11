@@ -7,25 +7,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import { connect } from 'react-redux'
+import { logIn } from '../../redux/Actions';
 
 class Auth1 extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
+    state = {
       pass: '',
-      email: '',
+      email: ''
     };
 
-  }
 handleChangeEmail = (event,values) => {
   
 
@@ -35,7 +31,7 @@ handleChangeEmail = (event,values) => {
       console.log(this.state.email);
     });
 }
-handleChange = (event) => {
+handleChange = event => {
   const { name, value } = event.target;
 
   this.setState({
@@ -54,22 +50,22 @@ handleButtonClick()
   console.log(this.state);
   if (this.state.email === 'admin@mail.ru' && this.state.pass === 'admin') 
   {
-    //this.props.login_bool(true);
-    //if (this.props.logInf) {
+    this.props.login_bool(true);
+    if (this.props.logInf) {
       this.props.history.push('/main');
-    //}
+    }
   }
   
   else if (this.state.email === 'viktor@mail.ru' && this.state.pass === 'viktor') 
   {
-    //this.props.login_bool(true);
-    //if (this.props.logInf) {
+    this.props.login_bool(true);
+    if (this.props.logInf) {
       this.props.history.push('/main');
-    //}
+    }
   }
   else 
   {
-    //this.props.login_bool(false);
+    this.props.login_bool(false);
     alert("Неверный пароль");
   }
   
@@ -77,6 +73,7 @@ handleButtonClick()
 }
 
   render() {
+    
     const useStyles = makeStyles((theme) => ({
       paper: {
         marginTop: theme.spacing(8),
@@ -116,7 +113,7 @@ handleButtonClick()
             freeSolo
             options={Emails.map((option) => option.title)}
             renderInput={(params) => (
-          <TextField {...params} label="Email Addres" margin="normal" variant="outlined" margin="normal" required fullWidth id="email" name="email" value={email} autoFocus onChange={this.handleChange}/>
+          <TextField {...params} label="Email Addres" margin="normal" variant="outlined" margin="normal" required fullWidth id="email" name="email" value={email} autoFocus type={'text'} onChange={this.handleChange}/>
           )}
           />
           <Autocomplete 
@@ -151,7 +148,7 @@ handleButtonClick()
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Нет аккаунта? Зарегистрируйся"}
                 </Link>
               </Grid>
             </Grid>
@@ -175,4 +172,14 @@ const Passs = [
   { title: 'Знать'}
   
 ];
-export default Auth1;
+const mapStateToProps = (state) => {
+  return {
+    logInf: state.auth_reducer.logged
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login_bool: (log) => dispatch(logIn(log))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Auth1);

@@ -1,13 +1,19 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import './index.css';
-import Marshrut from './Marshrut';
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import './components/index.css';
+import Marshrut from './components/Auth/Marshrut';
+import * as serviceWorker from './components/serviceWorker';
+import allreducers from '../src/redux/reducers'
+const store = createStore(allreducers)
 render((
+  <Provider store={store}>
   <BrowserRouter>
     <Marshrut />
   </BrowserRouter>
+  </Provider>
 ), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

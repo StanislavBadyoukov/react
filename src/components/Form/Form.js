@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-
+import { connect } from 'react-redux';
+import { add_user } from '../../redux/Actions/index';
 class Form extends Component {
     constructor(props) {
         super(props);
         
         this.initialState = {
+            id: 3,
             firstname: '',
             lastname: '',
             email: ''
@@ -22,11 +24,18 @@ class Form extends Component {
     }
 
     onFormSubmit = (event) => {
-        event.preventDefault();
-        
         this.props.handleSubmit(this.state);
-        this.setState(this.initialState);
+        const { firstname, lastname, email } = this.state;
+        event.preventDefault();
+        this.props.add_user(firstname, lastname, email);
     }
+    onClickUp = () => {
+        this.setState((prevState) => {
+            return {
+                id: prevState.id + 1,
+            }
+        })
+    };
 
     render() {
         const { firstname, lastname, email } = this.state; 
@@ -76,4 +85,9 @@ class Form extends Component {
     }
 }
 
-export default Form;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        add_user: (firstname, lastname, email) => dispatch(add_user(firstname, lastname, email))
+    }
+}
+export default connect(null, mapDispatchToProps)(Form);
