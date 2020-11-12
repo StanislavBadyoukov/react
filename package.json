@@ -1,7 +1,7 @@
 {
-  "author": "KVirB",
-  "name": "kvirbreact",
-  "version": "0.1.0",
+  "author": "StanislavBadyoukov",
+  "name": "react",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",

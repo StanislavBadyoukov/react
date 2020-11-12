@@ -23,7 +23,7 @@ class App extends Component {
       
       return (
           <div className="container">
-              <h1>KVirB React Project</h1>
+              <h1>React Project Sample</h1>
               
               <Form handleSubmit={this.handleSubmit} />
               <br></br>

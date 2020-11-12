@@ -104,7 +104,7 @@ handleButtonClick()
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Войти
+            Enter
         </Typography>
           <form className={classes.form} noValidate>
           <Autocomplete
@@ -138,17 +138,17 @@ handleButtonClick()
               onClick={this.handleButtonClick.bind(this)}
             >
               
-              Вход
+              Sign up
           </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Забыли пороль?
+                  Forgot password?
               </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Нет аккаунта? Зарегистрируйся"}
+                  {"Cannot sign up? Register"}
                 </Link>
               </Grid>
             </Grid>
@@ -162,14 +162,14 @@ handleButtonClick()
 
 const Emails = [
   { title: 'admin@mail.ru'},
-  { title: 'viktor@mail.ru'}
+  { title: 'stan@mail.ru'}
   
 ];
 const Passs = [
-  { title: 'А'},
-  { title: 'Пороль'},
-  { title: 'Нужно'},
-  { title: 'Знать'}
+  { title: 'У'},
+  { title: 'Попа'},
+  { title: 'Была'},
+  { title: 'Собака'}
   
 ];
 const mapStateToProps = (state) => {
